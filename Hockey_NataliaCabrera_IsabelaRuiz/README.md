@@ -65,6 +65,20 @@ El sistema fue desarrollado en **cuatro fases principales**, todas con modelos e
 | Clasificación de jugadas    | Propio      | Videos divididos       | Clips de 2–3 segundos anotados manualmente                 |
 | Casco y guantes             | Propio      | Dataset recolectado    | Imágenes clasificadas manualmente por tipo de protección   |
 
+- Archivos omitidos por limitaciones de GitHub
+
+Este proyecto utiliza más de 300 imágenes clasificadas y más de 70 clips de video para entrenamiento, validación y pruebas en las distintas fases (detección, clasificación de jugadas, y verificación de equipo de protección). Sin embargo, por restricciones de GitHub:
+
+No se incluyeron todos los archivos multimedia en este repositorio.
+
+En particular, no se subieron los siguientes:
+
+- Videos completos del dataset (clips de jugadas).
+
+- Imágenes clasificadas para casco y guantes (más de 300 en total).
+
+- Imágenes de validación 
+
 ---
 
 ## 4. 📈 Métricas y resultados
