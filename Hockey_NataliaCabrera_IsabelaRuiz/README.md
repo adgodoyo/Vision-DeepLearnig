@@ -7,7 +7,7 @@
 
 ## 1. 🧩 Resumen del problema y su impacto social
 
-El hockey sobre hielo es un deporte de alto impacto físico. Los jugadores se enfrentan a velocidades altas, superficies duras, y contacto frecuente con otros jugadores o el puck. A pesar de la exigencia reglamentaria del uso de casco y guantes, en contextos escolares o ligas menores muchas veces esta protección no se usa correctamente, o no se verifica.
+El hockey en linea  es un deporte de alto impacto físico. Los jugadores se enfrentan a velocidades altas, superficies duras, y contacto frecuente con otros jugadores o el puck. A pesar de la exigencia reglamentaria del uso de casco y guantes, en contextos escolares o ligas menores muchas veces esta protección no se usa correctamente, o no se verifica.
 
 Este proyecto busca **mejorar la seguridad y el monitoreo automatizado** de los partidos, a través de una herramienta que:
 
