@@ -1,0 +1,6 @@
+path: ./hockeyv8_clean
+train: images
+val: images
+test: images
+nc: 2
+names: ['disco', 'jugador']
