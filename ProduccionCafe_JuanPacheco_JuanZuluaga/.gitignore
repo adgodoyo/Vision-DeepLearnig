@@ -1,0 +1,4 @@
+*.pt
+**/runs/
+**/.ipynb_checkpoints/
+**/YOLODataset/
