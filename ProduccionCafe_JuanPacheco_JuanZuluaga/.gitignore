@@ -3,3 +3,4 @@ yolo*.pt
 **/.ipynb_checkpoints/
 **/YOLODataset/
 venv
+**/__pycache__/
