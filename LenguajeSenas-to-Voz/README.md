@@ -219,39 +219,39 @@ de código abierto y totalmente funcional en CPU.
   <tbody>
     <tr>
       <td><strong>hola</strong></td>
-      <td><img src="Figures/hola.png" width="180"/></td>
+      <td><img src="Figures/Hola.png" width="180"/></td>
     </tr>
     <tr>
       <td><strong>adios</strong></td>
-      <td><img src="Figures/adios.png" width="180"/></td>
+      <td><img src="Figures/Adios.png" width="180"/></td>
     </tr>
     <tr>
       <td><strong>bien</strong></td>
-      <td><img src="Figures/bien.png" width="180"/></td>
+      <td><img src="Figures/Bien.png" width="180"/></td>
     </tr>
     <tr>
       <td><strong>mal</strong></td>
-      <td><img src="Figures/mal.png" width="180"/></td>
+      <td><img src="Figures/Mal.png" width="180"/></td>
     </tr>
     <tr>
       <td><strong>mas_o_menos</strong></td>
-      <td><img src="Figures/mas_o_menos.png" width="180"/></td>
+      <td><img src="Figures/MasOMenos.png" width="180"/></td>
     </tr>
     <tr>
       <td><strong>lo_siento</strong></td>
-      <td><img src="Figures/lo_siento.png" width="180"/></td>
+      <td><img src="Figures/LoSiento.png" width="180"/></td>
     </tr>
     <tr>
       <td><strong>como_estas</strong></td>
-      <td><img src="Figures/como_estas.png" width="180"/></td>
+      <td><img src="Figures/ComoEstas.png" width="180"/></td>
     </tr>
     <tr>
       <td><strong>feliz_dia</strong></td>
-      <td><img src="Figures/feliz_dia.png" width="180"/></td>
+      <td><img src="Figures/FelizDia.png" width="180"/></td>
     </tr>
     <tr>
       <td><strong>familia</strong></td>
-      <td><img src="Figures/familia.png" width="180"/></td>
+      <td><img src="Figures/Familia.png" width="180"/></td>
     </tr>
     <tr>
       <td><strong>Papa</strong></td>
