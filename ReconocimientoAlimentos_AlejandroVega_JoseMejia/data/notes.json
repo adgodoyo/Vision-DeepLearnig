@@ -1,0 +1,81 @@
+{
+  "categories": [
+    {
+      "id": 0,
+      "name": "Arepa"
+    },
+    {
+      "id": 1,
+      "name": "Arequipe"
+    },
+    {
+      "id": 2,
+      "name": "Atun"
+    },
+    {
+      "id": 3,
+      "name": "BonYurt"
+    },
+    {
+      "id": 4,
+      "name": "Cerveza"
+    },
+    {
+      "id": 5,
+      "name": "Coca Cola"
+    },
+    {
+      "id": 6,
+      "name": "Jugo de Mandarina"
+    },
+    {
+      "id": 7,
+      "name": "Jugo de Naranja"
+    },
+    {
+      "id": 8,
+      "name": "Leche"
+    },
+    {
+      "id": 9,
+      "name": "Mayonesa"
+    },
+    {
+      "id": 10,
+      "name": "Mermelada"
+    },
+    {
+      "id": 11,
+      "name": "Mostaza"
+    },
+    {
+      "id": 12,
+      "name": "Queso Mozzarella"
+    },
+    {
+      "id": 13,
+      "name": "Queso Parmesano"
+    },
+    {
+      "id": 14,
+      "name": "Salsa de Tomate"
+    },
+    {
+      "id": 15,
+      "name": "Saltin Noel"
+    },
+    {
+      "id": 16,
+      "name": "Suero"
+    },
+    {
+      "id": 17,
+      "name": "Yogurt Griego"
+    }
+  ],
+  "info": {
+    "year": 2025,
+    "version": "1.0",
+    "contributor": "Label Studio"
+  }
+}
