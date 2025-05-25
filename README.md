@@ -219,11 +219,11 @@ de código abierto y totalmente funcional en CPU.
   <tbody>
     <tr>
       <td><strong>hola</strong></td>
-      <td><img src="Figures/hola.png" width="180"/></td>
+      <td><img src="LenguajeSenas-to-Voz/Figures/Hola.png" width="180"/></td>
     </tr>
     <tr>
       <td><strong>adios</strong></td>
-      <td><img src="Figures/adios.png" width="180"/></td>
+      <td><img src="LenguajeSenas-to-Voz/Figures/Adios.png" width="180"/></td>
     </tr>
     <tr>
       <td><strong>bien</strong></td>
