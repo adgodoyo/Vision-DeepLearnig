@@ -242,7 +242,7 @@ class MLPipeline:
         test_mae = mean_absolute_error(self.y_test, test_pred)
         test_rmse = np.sqrt(mean_squared_error(self.y_test, test_pred))
         
-        print(f"\nTraditional ML Final Test Results:")
+        print(f"\nFinal Test Results:")
         print(f"Test R²: {test_r2:.4f}")
         print(f"Test MAE: {test_mae:.4f}")
         print(f"Test RMSE: {test_rmse:.4f}")
