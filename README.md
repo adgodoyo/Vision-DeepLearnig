@@ -247,15 +247,15 @@ de código abierto y totalmente funcional en CPU.
     </tr>
     <tr>
       <td><strong>feliz_dia</strong></td>
-      <td><img src="Figures/feliz_dia.png" width="180"/></td>
+      <td><img src="LenguajeSenas-to-Voz/Data/Figures/FelizDia.png" width="180"/></td>
     </tr>
     <tr>
       <td><strong>familia</strong></td>
-      <td><img src="Figures/familia.png" width="180"/></td>
+      <td><img src="LenguajeSenas-to-Voz/Data/Figures/Familia.png" width="180"/></td>
     </tr>
     <tr>
       <td><strong>Papa</strong></td>
-      <td><img src="Figures/Papa.png" width="180"/></td>
+      <td><img src="LenguajeSenas-to-Voz/Data/Figures/Papa.png" width="180"/></td>
     </tr>
   </tbody>
 </table>
