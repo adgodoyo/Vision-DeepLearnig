@@ -219,7 +219,7 @@ de código abierto y totalmente funcional en CPU.
   <tbody>
     <tr>
       <td><strong>hola</strong></td>
-      <td><img src="LenguajeSenas-to-Voz/Figures/Hola.png" width="180"/></td>
+      <td><img src="LenguajeSenas-to-Voz/Data/Figures/Hola.png" width="180"/></td>
     </tr>
     <tr>
       <td><strong>adios</strong></td>
@@ -227,23 +227,23 @@ de código abierto y totalmente funcional en CPU.
     </tr>
     <tr>
       <td><strong>bien</strong></td>
-      <td><img src="Figures/bien.png" width="180"/></td>
+      <td><img src="LenguajeSenas-to-Voz/Data/Figures/Bien.png" width="180"/></td>
     </tr>
     <tr>
       <td><strong>mal</strong></td>
-      <td><img src="Figures/mal.png" width="180"/></td>
+      <td><img src="LenguajeSenas-to-Voz/Data/Figures/Mal.png" width="180"/></td>
     </tr>
     <tr>
       <td><strong>mas_o_menos</strong></td>
-      <td><img src="Figures/mas_o_menos.png" width="180"/></td>
+      <td><img src="LenguajeSenas-to-Voz/Data/Figures/MasOMenos.png" width="180"/></td>
     </tr>
     <tr>
       <td><strong>lo_siento</strong></td>
-      <td><img src="Figures/lo_siento.png" width="180"/></td>
+      <td><img src="LenguajeSenas-to-Voz/Data/Figures/LoSiento.png" width="180"/></td>
     </tr>
     <tr>
       <td><strong>como_estas</strong></td>
-      <td><img src="Figures/como_estas.png" width="180"/></td>
+      <td><img src="LenguajeSenas-to-Voz/Data/Figures/ComoEstas.png" width="180"/></td>
     </tr>
     <tr>
       <td><strong>feliz_dia</strong></td>
