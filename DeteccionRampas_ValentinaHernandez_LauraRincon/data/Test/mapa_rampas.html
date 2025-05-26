@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mapa de Rampas Detectadas</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDO7DM04sKP33P3vi2KZyyCdi6A_oQEvnM&callback=initMap" async defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <style>
+      #map {
+        height: 500px;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>Mapa de Rampas Detectadas</h3>
+    <div id="map"></div>
+    <script>
+      var map;
+      
+      // Función para inicializar el mapa de Google Maps
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 4.60971, lng: -74.08175},  // Coordenadas iniciales (por ejemplo, Bogotá)
+          zoom: 12
+        });
+
+        // Leer el archivo CSV con PapaParse
+        Papa.parse('rampas_con_coordenadas.csv', {
+          download: true,
+          header: true,
+          dynamicTyping: true,
+          complete: function(results) {
+            // Colocar los marcadores para cada rampa detectada
+            addMarkers(results.data);
+          }
+        });
+      }
+
+      // Función para agregar los marcadores al mapa
+      function addMarkers(rampasData) {
+        rampasData.forEach(function(rampa) {
+          if (rampa.rampa_lat && rampa.rampa_lon) {
+            var marker = new google.maps.Marker({
+              position: {lat: rampa.rampa_lat, lng: rampa.rampa_lon},
+              map: map,
+              title: 'Rampa ' + rampa.rampa_id
+            });
+            // Puedes agregar información adicional a cada marcador, como un popup
+            var infoWindow = new google.maps.InfoWindow({
+              content: `Rampa ID: ${rampa.rampa_id}<br>Lat: ${rampa.rampa_lat}, Lon: ${rampa.rampa_lon}`
+            });
+            marker.addListener('click', function() {
+              infoWindow.open(map, marker);
+            });
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
