@@ -196,7 +196,7 @@ de código abierto y totalmente funcional en CPU.
     </tr>
     <tr>
       <td><strong>adios</strong></td>
-      <td><img src="LenguajeSenas-to-Voz/Figures/Adios.png" width="180"/></td>
+      <td><img src="LenguajeSenas-to-Voz/Data/Figures/Adios.png" width="180"/></td>
     </tr>
     <tr>
       <td><strong>bien</strong></td>
@@ -237,7 +237,7 @@ de código abierto y totalmente funcional en CPU.
 
 ## 📚 Créditos
 
-**Autores:**  Juan Sebastian Rodriguez Salazar y Johan Santiago Caro Valencia / Grupo – Visión Computacional, 2025-I
+**Autores:**  Juan Sebastian Rodríguez Salazar y Johan Santiago Caro Valencia / Grupo – Visión Computacional, 2025-I
 
 Agradecimientos al repositorio base [@ronvidev](https://github.com/ronvidev/modelo_lstm_lsp)
 por la lógica original de captura.
