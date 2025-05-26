@@ -1,0 +1,8 @@
+git+https://github.com/tensorflow/examples.git
+keras
+pandas
+matplotlib
+numpy
+opencv-python
+scikit-learn
+tensorflow
