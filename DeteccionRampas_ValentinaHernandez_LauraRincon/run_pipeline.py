@@ -21,38 +21,42 @@ MODELS_DIR = os.path.join(BASE_DIR, 'data', 'Modelos')
 # Configurar Roboflow
 rf = Roboflow(api_key=ROBOFLOW_API_KEY)
 
-# Detección
-project_det = rf.workspace("vision-computacional-u02en").project("ramps-detection-n1ecd")
-version_det = project_det.version(1)
-version_det.download("yolov11")
+# ==============================
+# BLOQUE DE ENTRENAMIENTO (Ya se tienen los modelos entrenados)
+# ==============================
 
-# Segmentación
-project_seg = rf.workspace("vision-computacional-u02en").project("ramps-segmentation")
-version_seg = project_seg.version(1)
-version_seg.download("yolov11")
+# # Detección
+# project_det = rf.workspace("vision-computacional-u02en").project("ramps-detection-n1ecd")
+# version_det = project_det.version(1)
+# version_det.download("yolov11")
 
-# Entrenar modelos
-detection_model = YOLO('yolo11n.pt')
-detection_model.train(
-    data=os.path.join(BASE_DIR, 'Ramps-detection-1', 'data.yaml'),
-    epochs=150,
-    imgsz=640,
-    batch=16,
-    name='rampa_detection_model',
-    augment=True,
-    patience=20
-)
-detection_model.predict(os.path.join(BASE_DIR, 'Ramps-detection-1', 'test', 'images', '*'), imgsz=640, save=True, conf=0.5)
+# # Segmentación
+# project_seg = rf.workspace("vision-computacional-u02en").project("ramps-segmentation")
+# version_seg = project_seg.version(1)
+# version_seg.download("yolov11")
 
-segmentation_model = YOLO('yolo11n-seg.pt')
-segmentation_model.train(
-    data=os.path.join(BASE_DIR, 'Ramps-segmentation-1', 'data.yaml'),
-    epochs=50,
-    imgsz=640,
-    batch=16,
-    name='rampa_segmentation_model'
-)
-segmentation_model.predict(os.path.join(BASE_DIR, 'Ramps-segmentation-1', 'test', 'images', '*'), imgsz=640, save=True, conf=0.5)
+# # Entrenar modelos
+# detection_model = YOLO('yolo11n.pt')
+# detection_model.train(
+#     data=os.path.join(BASE_DIR, 'Ramps-detection-1', 'data.yaml'),
+#     epochs=150,
+#     imgsz=640,
+#     batch=16,
+#     name='rampa_detection_model',
+#     augment=True,
+#     patience=20
+# )
+# detection_model.predict(os.path.join(BASE_DIR, 'Ramps-detection-1', 'test', 'images', '*'), imgsz=640, save=True, conf=0.5)
+
+# segmentation_model = YOLO('yolo11n-seg.pt')
+# segmentation_model.train(
+#     data=os.path.join(BASE_DIR, 'Ramps-segmentation-1', 'data.yaml'),
+#     epochs=50,
+#     imgsz=640,
+#     batch=16,
+#     name='rampa_segmentation_model'
+# )
+# segmentation_model.predict(os.path.join(BASE_DIR, 'Ramps-segmentation-1', 'test', 'images', '*'), imgsz=640, save=True, conf=0.5)
 
 # Inferencia final
 rampas_df = pd.read_csv(os.path.join(TEST_DIR, 'RampsGeoreference.csv'))
