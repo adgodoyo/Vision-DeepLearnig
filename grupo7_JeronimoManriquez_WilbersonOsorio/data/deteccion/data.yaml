@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['persona']
+
+roboflow:
+  workspace: will-workspace-zcois
+  project: my-first-project-yydmy
+  version: 6
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/will-workspace-zcois/my-first-project-yydmy/dataset/6
