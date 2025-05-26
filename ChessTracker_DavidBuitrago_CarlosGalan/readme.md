@@ -12,6 +12,53 @@ El impacto social es significativo:
 
 ---
 
+## Estructura del repositorio
+
+```
+ChessTracker/
+│
+├── main.py
+├── src/
+│   ├── board_detection.py
+│   ├── piece_detection.py
+│   ├── fen_conversion.py
+│   ├── move_detection.py
+│   └── pgn_writer.py
+├── models/
+│   └── best2.pt
+├── images/
+│   └── (imágenes de entrada)
+├── README.md
+└── requirements.txt
+```
+
+- **main.py:** Script principal de ejecución.
+- **src/**: Código fuente de los módulos principales.
+- **models/**: Modelos entrenados para detección de piezas.
+- **images/**: Imágenes de entrada y calibración.
+- **requirements.txt:** Dependencias del proyecto.
+
+---
+
+## Cómo ejecutar
+
+1. **Instala las dependencias:**
+   ```
+   pip install -r requirements.txt
+   ```
+2. **Prepara tus imágenes:**
+   - Coloca una imagen del tablero vacío como `empty.JPG` en la carpeta `images/`.
+   - Coloca las imágenes de cada estado del tablero (`1.jpg`, `2.jpg`, ...) en la misma carpeta.
+3. **Ejecuta el sistema:**
+   ```
+   python main.py
+   ```
+4. **Sigue las instrucciones en consola:**
+   - Se te pedirá indicar la orientación del tablero (ubicación de la casilla h1).
+   - El sistema procesará las imágenes y generará el archivo `partida.pgn` con la reconstrucción de la partida.
+
+---
+
 ## 2. Descripción de la arquitectura y justificación de decisiones
 
 El sistema está diseñado de forma modular para facilitar su mantenimiento, escalabilidad y adaptación a distintos escenarios.  
@@ -247,7 +294,7 @@ No hay indicios de sobreajuste, ya que las curvas de validación siguen la misma
 
 ---
 
-#### 📈 Métricas de desempeño
+#### Métricas de desempeño
 
 - **Precisión y recall**: Ambas métricas se estabilizan cerca de 1.0 desde la época 20, con fluctuaciones menores, lo cual sugiere que el modelo tiene una **muy baja tasa de falsos positivos y falsos negativos**.
 - **mAP50**: Se mantiene consistentemente por encima de 0.98 a partir de la época 15, lo cual es excelente.
@@ -255,7 +302,7 @@ No hay indicios de sobreajuste, ya que las curvas de validación siguen la misma
 
 ---
 
-#### 🧠 Implicaciones para el despliegue
+#### Implicaciones para el despliegue
 
 Estos resultados demuestran que el modelo ha aprendido de manera efectiva a partir de los pesos preentrenados, ajustándose muy bien a las particularidades del dataset de piezas de ajedrez. Gracias a la alta precisión, recall y mAP, el modelo está listo para ser desplegado en un sistema de reconocimiento en tiempo real, con alto grado de fiabilidad.
 
@@ -390,52 +437,7 @@ El modelo se comporta de manera **muy robusta** cuando se considera un umbral de
 
 ---
 
-## Estructura del repositorio
 
-```
-ChessTracker/
-│
-├── main.py
-├── src/
-│   ├── board_detection.py
-│   ├── piece_detection.py
-│   ├── fen_conversion.py
-│   ├── move_detection.py
-│   └── pgn_writer.py
-├── models/
-│   └── best2.pt
-├── images/
-│   └── (imágenes de entrada)
-├── README.md
-└── requirements.txt
-```
-
-- **main.py:** Script principal de ejecución.
-- **src/**: Código fuente de los módulos principales.
-- **models/**: Modelos entrenados para detección de piezas.
-- **images/**: Imágenes de entrada y calibración.
-- **requirements.txt:** Dependencias del proyecto.
-
----
-
-## Cómo ejecutar
-
-1. **Instala las dependencias:**
-   ```
-   pip install -r requirements.txt
-   ```
-2. **Prepara tus imágenes:**
-   - Coloca una imagen del tablero vacío como `empty.JPG` en la carpeta `images/`.
-   - Coloca las imágenes de cada estado del tablero (`1.jpg`, `2.jpg`, ...) en la misma carpeta.
-3. **Ejecuta el sistema:**
-   ```
-   python main.py
-   ```
-4. **Sigue las instrucciones en consola:**
-   - Se te pedirá indicar la orientación del tablero (ubicación de la casilla h1).
-   - El sistema procesará las imágenes y generará el archivo `partida.pgn` con la reconstrucción de la partida.
-
----
 
 ## Contacto
 
