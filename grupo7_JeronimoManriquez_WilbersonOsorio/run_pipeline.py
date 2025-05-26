@@ -7,8 +7,8 @@ from pathlib import Path
 from matplotlib import pyplot as plt
 
 # --- CONFIGURACIÓN ---
-BASE_DIR = "grupo7_JeronimoManriquez_WilbersonOsorio"
-IMG_DIR = os.path.join(BASE_DIR, "data", "test_images")
+BASE_DIR = Path(__file__).resolve().parent
+IMG_DIR = os.path.join(BASE_DIR, "data", "deteccion", "train", "images")
 
 DETECTION_MODEL_PATH = os.path.join(BASE_DIR, "data", "modelodetec", "weights", "best.pt")
 SEGMENTATION_MODEL_PATH = os.path.join(BASE_DIR, "data", "modeloseg", "weights", "best.pt")
@@ -18,6 +18,15 @@ OCCUPANCY_THRESHOLDS = {
     "Medium": (6, 12),
     "Full": (13, float("inf"))
 }
+
+def clasificar_por_area(pct):
+    if pct <= 8:
+        return "low"
+    elif pct <= 18:
+        return "medium"
+    else:
+        return "full"
+
 
 # --- CARGA DE MODELOS ---
 print("Cargando modelos...")
@@ -53,10 +62,15 @@ for image_file in os.listdir(IMG_DIR):
     # Segmentación
     results_seg = seg_model(img)
     masks = results_seg[0].masks.data.cpu().numpy() if results_seg[0].masks else []
+    total_mask_area = sum(np.sum(mask) for mask in masks)
+    H, W = img.shape[:2]
+    total_area = H * W
+    pct_ocupado = (total_mask_area / total_area) * 100
+    clase_area = clasificar_por_area(pct_ocupado)
 
     # Visualización
     annotated_img = results_det[0].plot()
-    if masks.any():
+    if len(masks) != 0:
         mask_img = np.zeros_like(img)
         for m in masks:
             mask = m.astype(np.uint8) * 255
@@ -64,14 +78,11 @@ for image_file in os.listdir(IMG_DIR):
             cv2.drawContours(mask_img, contours, -1, (0, 255, 0), 2)
         annotated_img = cv2.addWeighted(annotated_img, 1, mask_img, 0.5, 0)
 
-    cv2.putText(annotated_img, f'Ocupación: {occupancy_level} ({person_count} personas)',
-                (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
-
     out_path = os.path.join(output_dir, f"result_{image_file}")
     cv2.imwrite(out_path, annotated_img)
 
     plt.figure(figsize=(10, 6))
     plt.imshow(cv2.cvtColor(annotated_img, cv2.COLOR_BGR2RGB))
     plt.axis("off")
-    plt.title(f"{image_file} → {occupancy_level} ({person_count} personas)")
+    plt.title(f"Deteccion: {occupancy_level} ({person_count} personas). Segmentacion: {clase_area}")
     plt.show()
