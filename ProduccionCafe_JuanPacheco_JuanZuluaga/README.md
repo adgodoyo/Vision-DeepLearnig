@@ -39,8 +39,8 @@ Filtra las cerezas listas para cosecha dentro de un intervalo temporal definido 
 -   🔢 **Cantidad:** Se capturaron ~100 fotos; se seleccionaron 20 imágenes representativas para el proyecto.
 -   🏷️ **Etiquetado:**
     -   _Clústeres:_ Usando LabelMe para marcar agrupaciones.
-    -   _Granos:_ Etiquetados por clase (rojo, verde).
-    -   _Regresión:_ Con etiquetas manuales de días hasta cosecha, basadas en experiencia agrícola.
+    -   _Granos:_ Etiquetados por clase (rojo, verde) también usando LabelMe.
+    -   _Regresión:_ Con etiquetas manuales de días hasta cosecha, basadas en experiencia agrícola e investigación en la web.
 
 > ✅ Dataset propio y controlado, adaptado al contexto caficultor.
 
@@ -102,7 +102,42 @@ Filtra las cerezas listas para cosecha dentro de un intervalo temporal definido 
 
 ---
 
-## 🚀 5. Lecciones aprendidas y trabajo futuro
+## 🌀 5. Pipeline y Reporte de Producción
+
+Una vez entrenados los modelos, se integraron en un script ejecutable `run_pipeline.py` que procesa una imagen de cafeto completa y genera un reporte visual y estadístico del estado actual de la producción. El flujo final es:
+
+1. **Validación de la imagen de entrada.**
+2. **Detección de clústeres** de cerezas (gajos).
+3. **Recorte y detección de granos individuales** dentro de esos clústeres.
+4. **Predicción del tiempo de maduración** para cada grano detectado (modelo CNN).
+5. **Generación de visualización de detección** de granos clasificados por color.
+6. **Creación de un reporte de producción**, que incluye:
+   - Distribución por clase.
+   - Histograma de maduración.
+   - Proyección de cosecha acumulada.
+   - Producción estimada en kg.
+
+### 🎯 Resultado visual: detección final sobre la imagen original
+
+![Detección de Granos](src/notebook_imgs/img6.png)
+
+---
+
+### 📊 Reporte gráfico de producción generado automáticamente
+
+![Reporte de Producción](src/notebook_imgs/img7.png)
+
+---
+
+### 💻 Salida en consola del pipeline completo
+
+![Consola](src/notebook_imgs/img5.png)
+
+---
+
+Este pipeline permite a cualquier caficultor, ingeniero agrónomo o entidad de apoyo técnico analizar rápidamente el estado de un cultivo de café a partir de una simple imagen, brindando información clave para la planificación de la cosecha, la logística de recolección y la proyección de ventas futuras.
+
+## 🚀 6. Lecciones aprendidas y trabajo futuro
 
 ### ✔️ Lecciones clave
 
