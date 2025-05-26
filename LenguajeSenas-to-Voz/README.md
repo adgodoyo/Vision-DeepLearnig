@@ -29,6 +29,16 @@ empleando únicamente una cámara web y la **CPU**.
   </tbody>
 </table>
 
+
+### Matriz de Confusión
+![Matriz de Confusión](Data/Figures/Figure_1.png)
+
+### Curvas Precision–Recall
+![Curvas Precision–Recall](Data/Figures/Figure_2.png)
+
+### Visualización t-SNE del espacio latente
+![t-SNE](Data/Figures/Figure_3.png)
+
 ---
 
 ## 🗂️ Estructura del repositorio
