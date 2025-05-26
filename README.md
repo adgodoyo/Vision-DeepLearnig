@@ -93,8 +93,3 @@ pip install -r requirements.txt
 | Opcional: procesamiento de video | ✅ / ❌ |
 
 ---
-
-
-1. Ultralytics YOLO Docs: [https://docs.ultralytics.com/](https://docs.ultralytics.com/)
-2. Roboflow Docs: [https://docs.roboflow.com/](https://docs.roboflow.com/)
-3. GitHub PyGithub Docs: [https://pygithub.readthedocs.io/](https://pygithub.readthedocs.io/)
