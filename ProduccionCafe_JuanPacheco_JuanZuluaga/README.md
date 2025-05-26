@@ -137,7 +137,7 @@ Una vez entrenados los modelos, se integraron en un script ejecutable `run_pipel
 
 Este pipeline permite a cualquier caficultor, ingeniero agrónomo o entidad de apoyo técnico analizar rápidamente el estado de un cultivo de café a partir de una simple imagen, brindando información clave para la planificación de la cosecha, la logística de recolección y la proyección de ventas futuras.
 
-## 7. Instalación y ejecución
+## 6. Instalación y ejecución
 
 Debe clonar el repositorio e instalar las dependencias, preferiblemente en un entorno virtual para evitar conflictos (probado en python 3.10.15):
 
@@ -158,7 +158,7 @@ Ejemplo de uso:
 python run_pipeline.py data/test_raw/IMG20250402163325.jpg 15
 ```
 
-## 🚀 6. Lecciones aprendidas y trabajo futuro
+## 🚀 7. Lecciones aprendidas y trabajo futuro
 
 ### ✔️ Lecciones clave
 
