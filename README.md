@@ -1,95 +1,106 @@
-# 🧠 Vision-DeepLearnig
+# Proyecto Final: Identificación automatizada de rampas urbanas para movilidad inclusiva
+
+**Por: Valentina Hernández Quintana y Laura Alejandra Rincón Castaño**
 
 ---
 
-## 🎯 Objetivo General
+## 🧩 Resumen del problema y su impacto social
 
-Los proyectos buscan diseñar e implementar una solución de visión computacional basada en *deep learning*. Cada trabajo debe contener un arquitectura funcional que combine al menos dos tareas diferentes de visión por computador, reentrenando al menos uno de los componentes sobre un conjunto de datos propio.
+En muchas ciudades, las rampas peatonales son un elemento clave para garantizar la movilidad inclusiva, especialmente para personas con discapacidad, adultos mayores o personas con coches de bebé. Sin embargo, la ausencia de registros actualizados y sistemas de monitoreo dificulta su adecuada planificación, mantenimiento y uso.
 
----
-
-## 🧩 Instrucciones de Entrega
-
-### 1️⃣ Clonar el Repositorio Asignado por el Docente
-
-Cada grupo debe clonar el repositorio oficial habilitado para el curso:  
-
-```bash 
-git clone https://github.com/USUARIO/TALLER_FINAL_IMPACTO_SOCIAL.git
-cd TALLER_FINAL
-``` 
+Este proyecto propone una solución basada en visión por computador para **identificar automáticamente rampas urbanas en imágenes**, con el fin de mapearlas y generar un sistema de apoyo para decisiones de infraestructura inclusiva.
 
 ---
 
-### 2️⃣ Crear una Nueva Rama
+## 🛠️ Descripción de la arquitectura y decisiones de diseño
 
-Cada grupo debe trabajar en una rama nombrada de la siguiente forma:  
-📌 **Formato:** `grupoX_Nombre1_Nombre2`  
+La solución está compuesta por un pipeline que combina detección y segmentación de rampas, georreferenciación de los resultados y publicación en la nube mediante GitHub Pages. A continuación, se detallan los componentes clave:
 
-Ejemplo:  
+### 🔍 Modelo de detección
 
-```bash 
-git checkout -b grupo3_CamilaLopez_SantiagoPerez
-git push origin grupo3_CamilaLopez_SantiagoPerez
-``` 
+Se utilizó **YOLOv11n** para identificar la presencia de rampas en imágenes urbanas. Aunque el modelo está preentrenado en COCO, se realizó fine-tuning con un dataset propio utilizando Roboflow y configuraciones personalizadas.
 
----
+### ✂️ Modelo de segmentación
 
-### 3️⃣ Estructura del Proyecto
+Se implementó **YOLOv11n-seg** para obtener una máscara precisa de la rampa en cada imagen. También se realizó entrenamiento sobre datos anotados manualmente para mejorar el desempeño en condiciones locales.
 
-Cada equipo debe subir su trabajo dentro de una carpeta claramente identificada, con la siguiente convención de nombre:  
-📌 **Formato:** `NombreProblema_Nombre1_Nombre2/`
+### 🧭 Georreferenciación
 
-Ejemplo:
+A partir de un archivo `.csv` con coordenadas de latitud y longitud por imagen, se tradujeron las posiciones de detección (en píxeles) a coordenadas geográficas, estimando así la ubicación real de cada rampa detectada.
 
-```plaintext 
-📂 TALLER_FINAL_IMPACTO_SOCIAL/
-│── 📁 OcupacionTransporte_CamilaLopez_SantiagoPerez/
-│   │── 📁 data/                # Dataset usado, o scripts de carga desde fuente externa
-│   │── 📁 src/                 # Código fuente (Scripts/Notebook y otros artefactos como el yaml)
-│   │── 📜 run_pipeline.py      # Script principal de ejecución de extremo a extremo
-│   │── 📜 README.md            # Reporte técnico detallado del proyecto
-│   │── 📜 requirements.txt     # Archivo con las dependencias del proyecto
-│── 📁 OtroGrupo/
-│── 📜 README.md                # Archivo principal del repositorio (este documento)
-``` 
+### ☁️ Publicación web
+
+El resultado se guarda en un archivo `.csv` y se sube automáticamente a un repositorio de GitHub, desde donde se puede visualizar de manera interactiva a través de **GitHub Pages**.
 
 ---
 
-## 🧪 Ejecución del Pipeline
+## 🗃️ Estructura del pipeline
 
-Desde Colab o localmente (si se desea probar fuera del entorno de evaluación), el pipeline se debe correr con:
-
-```bash 
-python run_pipeline.py
-``` 
-
-Asegúrese de comentar dentro del script principal los pasos clave: carga de datos, preprocesamiento, inferencia, visualización y métricas.
-
----
-
-## 📦 Instalación de Dependencias
-
-El archivo `requirements.txt` debe incluir todas las dependencias utilizadas. Desde Colab o entorno local:
-
-```bash 
-pip install -r requirements.txt
-``` 
+1. Instalación de dependencias (`ultralytics`, `roboflow`, `opencv`, `matplotlib`, etc.)
+2. Descarga de datasets desde Roboflow.
+3. Entrenamiento de modelos YOLO (detección y segmentación).
+4. Inferencia sobre imágenes de prueba.
+5. Conversión de coordenadas píxel → geográficas.
+6. Visualización con `matplotlib`.
+7. Exportación a CSV y subida a GitHub.
+8. Visualización en: [Mapa de rampas](https://laurar287.github.io/Mapa-rampas/)
 
 ---
 
-## ✅ Checklist de Verificación
+## 🧪 Datasets utilizados
 
-| Ítem | Cumplido |
-|------|----------|
-| Dos tareas de visión combinadas | ✅ / ❌ |
-| Uso de deep learning predominante | ✅ / ❌ |
-| Dataset propio usado en el entrenamiento | ✅ / ❌ |
-| Script ejecutable de inicio a fin (`run_pipeline.py`) | ✅ / ❌ |
-| Estructura y nombramiento correctos del repositorio | ✅ / ❌ |
-| Reporte en `README.md` con las secciones solicitadas | ✅ / ❌ |
-| Dependencias claras en `requirements.txt` | ✅ / ❌ |
-| Código limpio y comentado | ✅ / ❌ |
-| Opcional: procesamiento de video | ✅ / ❌ |
+* **Propios**: Imágenes recolectadas en entornos urbanos reales.
+* **Roboflow**: Uso de la plataforma para anotación, gestión y descarga de los datasets en formato compatible con YOLOv11.
+
+Los datasets fueron preparados siguiendo la estructura requerida por Ultralytics:
+
+```
+dataset/
+├── images/
+│   ├── train/
+│   └── val/
+├── labels/
+│   ├── train/
+│   └── val/
+```
 
 ---
+
+## 📈 Métricas y resultados
+
+* **Detección**: Se alcanzó una precisión satisfactoria con `mAP@0.5 ≈ 0.47` y `mAP@0.5:0.95 ≈ 0.34` en el dataset personalizado.
+* **Segmentación**: Se lograron resultados útiles para superponer máscaras que ayudan a validar y visualizar la posición precisa de las rampas.
+* **Georreferenciación**: La conversión de píxeles a coordenadas funcionó con buena aproximación para visualización en mapas urbanos.
+
+---
+
+## 🧠 Lecciones aprendidas y mejoras futuras
+
+* La combinación de modelos de segmentación y detección puede fortalecer la precisión del sistema.
+* Es fundamental disponer de datasets de mayor tamaño y variedad para mejorar el rendimiento de los modelos.
+* El proceso de anotación manual en plataformas como CVAT o Roboflow requiere tiempo, pero mejora la calidad del entrenamiento.
+* Se podrían integrar técnicas de aumento de datos y mapas base tipo Leaflet o Folium para mejorar la visualización geográfica.
+* Implementar una app móvil que consuma este servicio permitiría escalar el impacto del proyecto.
+
+---
+
+## 📦 Requisitos (requirements.txt)
+
+```txt
+ultralytics==8.0.20
+roboflow==1.1.17
+matplotlib==3.7.1
+PyGithub==1.59.0
+opencv-python-headless==4.7.0.72
+pandas==1.5.3
+numpy==1.22.4
+requests==2.28.2
+```
+
+---
+
+## 📚 Referencias
+
+1. Ultralytics YOLO Docs: [https://docs.ultralytics.com/](https://docs.ultralytics.com/)
+2. Roboflow Docs: [https://docs.roboflow.com/](https://docs.roboflow.com/)
+3. GitHub PyGithub Docs: [https://pygithub.readthedocs.io/](https://pygithub.readthedocs.io/)
