@@ -112,10 +112,10 @@ Una vez entrenados los modelos, se integraron en un script ejecutable `run_pipel
 4. **Predicción del tiempo de maduración** para cada grano detectado (modelo CNN).
 5. **Generación de visualización de detección** de granos clasificados por color.
 6. **Creación de un reporte de producción**, que incluye:
-   - Distribución por clase.
-   - Histograma de maduración.
-   - Proyección de cosecha acumulada.
-   - Producción estimada en kg.
+    - Distribución por clase.
+    - Histograma de maduración.
+    - Proyección de cosecha acumulada.
+    - Producción estimada en kg.
 
 ### 🎯 Resultado visual: detección final sobre la imagen original
 
@@ -136,6 +136,27 @@ Una vez entrenados los modelos, se integraron en un script ejecutable `run_pipel
 ---
 
 Este pipeline permite a cualquier caficultor, ingeniero agrónomo o entidad de apoyo técnico analizar rápidamente el estado de un cultivo de café a partir de una simple imagen, brindando información clave para la planificación de la cosecha, la logística de recolección y la proyección de ventas futuras.
+
+## 7. Instalación y ejecución
+
+Debe clonar el repositorio e instalar las dependencias, preferiblemente en un entorno virtual para evitar conflictos (probado en python 3.10.15):
+
+```bash
+git clone https://github.com/JuanJoZP/coffee-production-dl
+cd coffee-production-dl/ProduccionCafe_JuanPacheco_JuanZuluaga
+python -m venv venv
+source venv/bin/activate # en linux
+venv\Scripts\activate.ps1 # en windows
+pip install -r requirements.txt
+```
+
+Luego puede ejecutar `python run_pipeline.py --help` para ver como se usa el script. Aseguese de ejecutar el script desde la carpeta `ProduccionCafe_JuanPacheco_JuanZuluaga`.
+
+Ejemplo de uso:
+
+```bash
+python run_pipeline.py data/test_raw/IMG20250402163325.jpg 15
+```
 
 ## 🚀 6. Lecciones aprendidas y trabajo futuro
 
