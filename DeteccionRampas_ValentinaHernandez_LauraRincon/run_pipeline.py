@@ -16,7 +16,7 @@ GITHUB_PAGE_URL = 'https://laurar287.github.io/Mapa-rampas/'
 # Directorios base
 BASE_DIR = os.path.dirname(__file__)
 TEST_DIR = os.path.join(BASE_DIR, 'data', 'Test')
-MODELS_DIR = os.path.join(BASE_DIR, 'Modelos')
+MODELS_DIR = os.path.join(BASE_DIR, 'data', 'Modelos')
 
 # Configurar Roboflow
 rf = Roboflow(api_key=ROBOFLOW_API_KEY)
