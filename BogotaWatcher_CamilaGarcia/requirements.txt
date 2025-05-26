@@ -1,0 +1,8 @@
+yt-dlp>=2023.11.29      # Para descargar videos
+tensorflow>=2.11.0      # incluye tf.keras y cargador de modelos .h5
+numpy>=1.21.0           # para manejo de arrays
+Pillow>=8.3.2           # para tensorflow.keras.preprocessing.image
+h5py>=3.1.0             # para cargar archivos .h5 con tf.keras
+ultralytics>=8.0.0      # para el paquete YOLO
+opencv-python>=4.5.3.56 # para cv2 (incluye la dependencia numpy)
+streamlit>=1.14.0       # para la interfaz web
