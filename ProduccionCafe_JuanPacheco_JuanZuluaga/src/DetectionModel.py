@@ -27,7 +27,7 @@ class DetectionModel:
             image_path, iou=iou, conf=conf, verbose=False, save=False
         )
 
-        image = cv2.imread(image_path)
+        image = cv2.imread(str(image_path))
         for box in results[0].boxes:
             x1, y1, x2, y2 = map(int, box.xyxy.cpu().numpy().flatten())
             filename = f"{x1}_{y1}.jpg"
