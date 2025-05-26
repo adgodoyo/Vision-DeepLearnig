@@ -49,6 +49,70 @@ El sistema está diseñado de forma modular para facilitar su mantenimiento, esc
 - Intervención manual en pasos críticos para asegurar robustez en entornos reales.
 
 ---
+## Principales librerías utilizadas
+
+- **OpenCV (`cv2`)**  
+  Se utiliza para el procesamiento de imágenes: lectura, transformación de perspectiva, detección de contornos, segmentación de casillas, dibujo de resultados y manipulación general de imágenes.
+
+- **NumPy (`numpy`)**  
+  Permite el manejo eficiente de matrices y operaciones matemáticas, fundamentales para la manipulación de coordenadas, imágenes y estados del tablero.
+
+- **YOLOv8 (a través de Ultralytics)**  
+  Framework de detección de objetos basado en deep learning. Se emplea para detectar y clasificar las piezas de ajedrez en las imágenes del tablero.
+
+- **EasyOCR**  
+  (Opcional, si se usa OCR) Para reconocimiento óptico de caracteres en los bordes del tablero, aunque en la versión final se prefiere la orientación manual.
+
+- **Matplotlib**  
+  (Opcional) Puede usarse para visualizar imágenes y resultados durante el desarrollo y la depuración.
+
+- **Otros módulos estándar de Python**  
+  - `os`, `sys`: Para manejo de rutas y archivos.
+  - `argparse`: Para argumentos de línea de comandos (si se usa).
+  - `copy`, `itertools`: Para manipulación avanzada de estructuras de datos.
+
+Estas librerías permiten implementar todo el flujo de visión computacional, detección de objetos, procesamiento de imágenes y reconstrucción digital de partidas de ajedrez a partir de imágenes reales.
+
+## Funciones principales de cada módulo
+
+### `src/board_detection.py`
+- **process_chessboard(image, pattern_size, cell_size):**
+  Detecta el tablero en la imagen, corrige la perspectiva, segmenta las casillas y devuelve la imagen transformada, las coordenadas de las casillas y la matriz de transformación.
+- **select_best_quadrilateral(image, contours, img_area, img_w, img_h):**
+  Selecciona el cuadrilátero más probable que corresponde al tablero de ajedrez entre los contornos detectados.
+- **order_points(pts):**
+  Ordena los puntos de un cuadrilátero para facilitar la transformación de perspectiva.
+- **detectar_orientacion_usuario(image):**
+  Permite al usuario indicar la orientación del tablero (ubicación de la casilla h1) para asegurar la correcta reconstrucción.
+
+### `src/piece_detection.py`
+- **piece_detection(image, model_path, conf):**
+  Detecta las piezas de ajedrez en la imagen usando un modelo YOLOv8 entrenado y retorna las cajas detectadas.
+- **asignar_piezas_a_casillas_transform(detections, squares, class_names, M):**
+  Asigna cada pieza detectada a su casilla correspondiente en el tablero transformado, generando una matriz de estado del tablero.
+
+### `src/fen_conversion.py`
+- **boardstate_to_fen(board_state):**
+  Convierte la matriz de estado del tablero (con piezas y posiciones) a la notación FEN estándar de ajedrez.
+
+### `src/move_detection.py`
+- **detectar_movimiento(prev_state, curr_state):**
+  Compara dos estados consecutivos del tablero y determina el movimiento realizado (incluyendo capturas, enroques, etc.).
+
+### `src/pgn_writer.py`
+- **move_to_pgn(move, fen_prev, fen_curr):**
+  Convierte un movimiento detectado y los estados FEN previos y actuales en una línea de notación PGN, incluyendo comentarios para análisis.
+
+### `main.py`
+- **main():**
+  Orquesta todo el flujo: calibración del tablero, orientación, detección de piezas, reconstrucción de estados, detección de movimientos y generación del archivo PGN final.
+- **get_board_state(image_path, model_path, squares, class_names, M, conf):**
+  Procesa una imagen del tablero y devuelve el estado del tablero en formato de matriz, listo para convertir a FEN o comparar.
+
+---
+
+Estas funciones permiten que el sistema procese imágenes de partidas reales y reconstruya la partida en formato digital estándar.
+
 
 ## 3. Detalle de los datasets
 
@@ -58,17 +122,78 @@ El sistema está diseñado de forma modular para facilitar su mantenimiento, esc
 - **Propósito:** Entrenamiento y validación del modelo de detección de piezas, así como pruebas de robustez del sistema completo.
 
 ### Dataset externo
-- **Chess Pieces Dataset (Kaggle):**  
-  [Enlace](https://www.kaggle.com/datasets)  
+- **Roboflow**  
+  [Roboflow](https://blog.roboflow.com/training-a-yolov3-object-detection-model-with-a-custom-dataset/)  
   Utilizado para pre-entrenamiento y aumento de datos, asegurando diversidad de estilos de piezas y tableros.
-- **Tableros sintéticos:**  
-  Generados artificialmente para simular condiciones extremas y mejorar la generalización del modelo.
-
-### Consideraciones éticas y de privacidad
-- Los datasets propios no se distribuyen públicamente para proteger la privacidad de los participantes y cumplir con regulaciones institucionales.
 - Se proveen scripts para que cualquier usuario pueda generar su propio dataset a partir de imágenes capturadas localmente.
 
 ---
+## Desarrollo del Fine-Tuning
+
+Para lograr una detección precisa de piezas de ajedrez en imágenes reales, fue necesario realizar un proceso de **fine-tuning** sobre modelos preentrenados de YOLOv8, adaptándolos a las características específicas de nuestro dominio.
+
+### 1. Primer Fine-Tuning: Dataset Externo
+
+El primer ajuste fino se realizó sobre el modelo base `yolov8m.pt` utilizando un dataset externo de piezas de ajedrez, obtenido de plataformas como Roboflow y Kaggle. Este dataset incluye imágenes variadas de tableros y piezas en diferentes condiciones de luz, ángulos y estilos.
+
+**Pasos realizados:**
+- Montaje de Google Drive para acceder a los datos.
+- Entrenamiento del modelo con los siguientes parámetros:
+  - **Épocas:** 50
+  - **Tamaño de imagen:** 640x640
+  - **Batch size:** 16
+- Archivo de configuración `data.yaml` adaptado a las clases de piezas de ajedrez.
+
+```python
+from ultralytics import YOLO
+
+model = YOLO('yolov8m.pt')
+
+model.train(
+    data='/content/drive/MyDrive/data/data.yaml',
+    epochs=50,
+    imgsz=640,
+    batch=16
+)
+```
+
+### 2. Segundo Fine-Tuning: Dataset Propio
+
+Para mejorar la robustez y adaptabilidad del modelo a nuestro entorno real, se realizó un segundo fine-tuning usando un dataset propio, generado y anotado específicamente para el proyecto. Este dataset incluye imágenes tomadas con nuestras cámaras, en los tableros y condiciones reales de uso.
+
+**Pasos realizados:**
+- Descarga y preparación del dataset propio desde Roboflow.
+- Carga del modelo previamente ajustado (`best.pt`).
+- Entrenamiento adicional con parámetros más estrictos:
+  - **Épocas:** 80
+  - **Batch size:** 16
+  - **Patience:** 15 (early stopping)
+  - **Validación activa:** para monitorear el desempeño en cada época.
+
+```python
+from ultralytics import YOLO
+model = YOLO('/content/best.pt')
+
+model.train(
+    data='/content/chess-pieces-detection-3/data.yaml',
+    epochs=80,
+    imgsz=640,
+    batch=16,
+    patience=15,
+    save=True,
+    val=True
+)
+```
+
+### 3. Resultados y Observaciones
+
+- El fine-tuning progresivo permitió que el modelo generalizara bien tanto en imágenes externas como en las propias.
+- Se observó una mejora significativa en la precisión (mAP) y en la robustez ante variaciones de iluminación y ángulo.
+- El uso de datasets propios fue clave para reducir falsos positivos y mejorar la detección en tableros y piezas reales.
+
+**Conclusión:**  
+El proceso de fine-tuning fue esencial para adaptar el modelo YOLOv8 a las necesidades específicas del proyecto, logrando un detector de piezas confiable y eficiente para el flujo de ChessTracker.
+
 
 ## 4. Métricas empleadas y discusión de resultados
 
@@ -164,3 +289,9 @@ ChessTracker/
 
 ---
 
+## Contacto
+
+Para dudas, sugerencias o colaboración, contacta a los autores del proyecto:
+
+- **David Santiago Buitrago Prada**
+- **Carlos Andrés Galán Pérez**
