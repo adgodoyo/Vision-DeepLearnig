@@ -5,11 +5,23 @@
 
 ---
 
-## 🧩 Resumen del problema y su impacto social
+## 🧩 Problema y su impacto social
 
-En muchas ciudades, las rampas peatonales son un elemento clave para garantizar la movilidad inclusiva, especialmente para personas con discapacidad, adultos mayores o personas con coches de bebé. Sin embargo, la ausencia de registros actualizados y sistemas de monitoreo dificulta su adecuada planificación, mantenimiento y uso.
+En las ciudades modernas, garantizar la movilidad inclusiva es un desafío pendiente. A pesar de que existen normas sobre accesibilidad universal y diseño de infraestructura adaptada, en la práctica muchas calles no cuentan con rampas peatonales o su ubicación no están documentadas.
 
-Este proyecto propone una solución basada en visión por computador para **identificar automáticamente rampas urbanas en imágenes**, con el fin de mapearlas y generar un sistema de apoyo para decisiones de infraestructura inclusiva.
+Las rampas son esenciales para personas con discapacidad motriz, adultos mayores, usuarios de sillas de ruedas, personas con cochecitos, entre otros. Sin embargo, actualmente no hay mecanismos eficientes ni automatizados para identificar, mapear y monitorear estas estructuras en el espacio urbano.
+
+Este proyecto propone una solución basada en visión por computador que permite detectar y segmentar automáticamente rampas peatonales en imágenes del entorno urbano. Esta información se convierte en datos georreferenciados que pueden ser publicados, visualizados y usados por gobiernos locales, organizaciones de accesibilidad, desarrolladores de apps inclusivas o sistemas de navegación.
+
+El impacto social puede verse en:
+
+✅ Promueve la movilidad inclusiva, permitiendo planificar y verificar infraestructura para todos.
+
+✅ Reduce brechas de información sobre la localización de las rampas urbanas.
+
+✅ Automatiza procesos que hoy son manuales y costosos, como los censos urbanos de accesibilidad.
+
+✅ Contribuye a los Objetivos de Desarrollo Sostenible (ODS), especialmente el ODS 11: Ciudades y comunidades sostenibles.
 
 ---
 
