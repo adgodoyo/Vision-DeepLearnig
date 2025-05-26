@@ -47,10 +47,10 @@ X_val = [ Path(dir)  for dir in X_val]
 y_val = [ Path(dir)  for dir in y_val]
 
 
-destino_X_train = Path("/content/drive/MyDrive/dataset_YOLO/dataset/images/train")
-destino_y_train = Path("/content/drive/MyDrive/dataset_YOLO/dataset/labels/train")
-destino_X_val = Path("/content/drive/MyDrive/dataset_YOLO/dataset/images/val")
-destino_y_val = Path("/content/drive/MyDrive/dataset_YOLO/dataset/labels/val")
+destino_X_train = Path("data/images/train")
+destino_y_train = Path("data/labels/train")
+destino_X_val = Path("data/images/val")
+destino_y_val = Path("data/labels/val")
 
 destinos = [destino_X_train, destino_y_train, destino_X_val, destino_y_val]
 
@@ -74,8 +74,8 @@ for (origen_x, origen_y) in zip(X_val, y_val):
 
 #Variables globales para el entrenamiento y analisis de precision
 
-DATA_DIR = "/content/drive/MyDrive/dataset_YOLO/dataset"
-YAML_OUT = "/content/drive/MyDrive/dataset_YOLO/dataset/custom.yaml"
+DATA_DIR = "data/dataset"
+YAML_OUT = "data/dataset/custom.yaml"
 MODEL_WEIGHTS = "yolov8n.pt"
 EPOCHS = 300
 IMG_SIZE = 640
