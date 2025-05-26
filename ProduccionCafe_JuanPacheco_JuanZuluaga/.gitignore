@@ -1,0 +1,7 @@
+yolo*.pt
+**/runs/
+**/.ipynb_checkpoints/
+**/YOLODataset/
+venv
+**/__pycache__/
+pipeline_output/*

@@ -1,0 +1,12 @@
+matplotlib==3.10.3
+numpy==2.2.6
+opencv_python==4.11.0.86
+optuna==4.3.0
+optuna-integration==4.3.0
+pandas==2.2.3
+Pillow==11.2.1
+scikit_learn==1.6.1
+torch==2.7.0
+torchvision==0.22.0
+ultralytics==8.3.144
+umap==0.1.1
