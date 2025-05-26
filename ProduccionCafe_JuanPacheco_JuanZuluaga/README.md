@@ -13,30 +13,34 @@ Este proyecto propone una herramienta automática basada en visión por computad
 La solución se compone de una cadena modular de modelos que colaboran para estimar la producción en kilos para un intervalo de fechas específico:
 
 ### 🔹 1. YOLOv8 – Detección de Clústeres
+
 Detecta agrupaciones de cerezas en las ramas del cafeto. Entrenado con imágenes propias y etiquetado manual, proporciona zonas de interés para análisis detallado.
 
 ### 🔹 2. YOLOv8 – Detección de Granos (Verdes y Rojos)
+
 Detecta cerezas individuales dentro de los clústeres recortados. El enfoque de dos etapas mejora la precisión al eliminar el ruido visual del entorno.
 
 ### 🔹 3. CNN – Estimación de Días a Cosecha
+
 Modelo de regresión que estima cuántos días faltan para la maduración de cada cereza, a partir de su imagen y su clase (roja o verde).
 
 ### 🔹 4. Cálculo de Producción
+
 Filtra las cerezas listas para cosecha dentro de un intervalo temporal definido por el usuario, calcula su número y multiplica por el peso promedio por grano para obtener el total en kilogramos.
 
 > 🧩 **Resumen del pipeline:**  
-`YOLOv8 Clusters → YOLOv8 Granos → CNN Regressor → Reporte de Producción`
+> `YOLOv8 Clusters → YOLOv8 Granos → CNN Regressor → Reporte de Producción`
 
 ---
 
 ## 🗂️ 3. Dataset utilizado
 
-- 📸 **Origen:** Fotografías tomadas directamente en un cafetal real.
-- 🔢 **Cantidad:** Se capturaron ~100 fotos; se seleccionaron 20 imágenes representativas para el proyecto.
-- 🏷️ **Etiquetado:**
-  - *Clústeres:* Usando LabelMe para marcar agrupaciones.
-  - *Granos:* Etiquetados por clase (rojo, verde).
-  - *Regresión:* Con etiquetas manuales de días hasta cosecha, basadas en experiencia agrícola.
+-   📸 **Origen:** Fotografías tomadas directamente en un cafetal real.
+-   🔢 **Cantidad:** Se capturaron ~100 fotos; se seleccionaron 20 imágenes representativas para el proyecto.
+-   🏷️ **Etiquetado:**
+    -   _Clústeres:_ Usando LabelMe para marcar agrupaciones.
+    -   _Granos:_ Etiquetados por clase (rojo, verde).
+    -   _Regresión:_ Con etiquetas manuales de días hasta cosecha, basadas en experiencia agrícola.
 
 > ✅ Dataset propio y controlado, adaptado al contexto caficultor.
 
@@ -46,12 +50,14 @@ Filtra las cerezas listas para cosecha dentro de un intervalo temporal definido 
 
 ### 🍇 YOLOv8 – Detección de Clústeres
 
-| Métrica       | Valor |
-|---------------|-------|
-| F1 Score      | 0.60  |
-| mAP@0.5       | 63.8% |
-| Precisión     | 69.1% |
-| Recall        | 53.3% |
+| Métrica   | Valor |
+| --------- | ----- |
+| F1 Score  | 0.60  |
+| mAP@0.5   | 63.8% |
+| Precisión | 69.1% |
+| Recall    | 53.3% |
+
+![Ejemplo de detección de clústeres](src/notebook_imgs/img3.png "Ejemplo de detección de clústeres")
 
 > Rendimiento aceptable como etapa inicial de segmentación gruesa.
 
@@ -61,21 +67,23 @@ Filtra las cerezas listas para cosecha dentro de un intervalo temporal definido 
 
 #### Clase Verde
 
-| Métrica       | Valor |
-|---------------|-------|
-| F1 Score      | 0.95  |
-| mAP@0.5       | 97.8% |
-| Precisión     | 93.9% |
-| Recall        | 97.0% |
+| Métrica   | Valor |
+| --------- | ----- |
+| F1 Score  | 0.95  |
+| mAP@0.5   | 97.8% |
+| Precisión | 93.9% |
+| Recall    | 97.0% |
 
 #### Clase Roja
 
-| Métrica       | Valor |
-|---------------|-------|
-| F1 Score      | 0.95  |
-| mAP@0.5       | 97.8% |
-| Precisión     | 99.4% |
-| Recall        | 91.7% |
+| Métrica   | Valor |
+| --------- | ----- |
+| F1 Score  | 0.95  |
+| mAP@0.5   | 97.8% |
+| Precisión | 99.4% |
+| Recall    | 91.7% |
+
+![Ejemplo de detección de granos](src/notebook_imgs/img4.png "Ejemplo de detección de granos")
 
 > 🎯 Precisión sobresaliente (>95%), incluso en condiciones reales de iluminación y complejidad visual.
 
@@ -83,12 +91,12 @@ Filtra las cerezas listas para cosecha dentro de un intervalo temporal definido 
 
 ### 📈 CNN – Regresión de Días a Cosecha
 
-| Métrica    | Valor     |
-|------------|-----------|
-| MAE        | 6.21 días |
-| RMSE       | 8.96 días |
-| R²         | 0.9434    |
-| MSE        | 80.27     |
+| Métrica | Valor     |
+| ------- | --------- |
+| MAE     | 6.21 días |
+| RMSE    | 8.96 días |
+| R²      | 0.9434    |
+| MSE     | 80.27     |
 
 > 📅 El modelo logra una excelente correlación con datos reales de maduración, siendo útil para estimaciones precisas de cosecha.
 
@@ -98,17 +106,16 @@ Filtra las cerezas listas para cosecha dentro de un intervalo temporal definido 
 
 ### ✔️ Lecciones clave
 
-- Un pipeline por etapas especializadas mejora la precisión general del sistema.
-- La calidad del etiquetado es clave para el rendimiento de los modelos.
-- El enfoque de detección + regresión permite transformar imágenes en cifras útiles para la industria.
+-   Un pipeline por etapas especializadas mejora la precisión general del sistema.
+-   La calidad del etiquetado es clave para el rendimiento de los modelos.
+-   El enfoque de detección + regresión permite transformar imágenes en cifras útiles para la industria.
 
 ### 🔮 Trabajo futuro
 
-- 📈 Aumentar el tamaño y variedad del dataset (condiciones climáticas, iluminación, cafetales diferentes).
-- 📹 Incluir seguimiento temporal con series de imágenes o video.
-- 📱 Desarrollar una interfaz web o app móvil para despliegue en campo por caficultores.
+-   📈 Aumentar el tamaño y variedad del dataset (condiciones climáticas, iluminación, cafetales diferentes).
+-   📹 Incluir seguimiento temporal con series de imágenes o video.
+-   📱 Desarrollar una interfaz web o app móvil para despliegue en campo por caficultores.
 
 ---
 
 > 🧠 Este proyecto demuestra el potencial del aprendizaje profundo para transformar procesos agrícolas tradicionales, aportando eficiencia, precisión y escalabilidad al corazón de la economía cafetera.
-

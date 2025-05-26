@@ -4,3 +4,4 @@ yolo*.pt
 **/YOLODataset/
 venv
 **/__pycache__/
+pipeline_output/*
