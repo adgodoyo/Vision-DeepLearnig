@@ -275,7 +275,7 @@ model.train(
 )
 ```
 
-### 🔧 Resultados del Fine-Tuning\
+### Resultados del Fine-Tuning\
 
 ![Tablero original](images\metrics\results.png)
 
