@@ -10,11 +10,6 @@ Original file is located at
 
 # **Proyecto final: Identificación automatizada de rampas urbanas para movilidad inclusiva.**
 
-**Instalamos dependencias necesarias:**
-"""
-
-!pip install ultralytics roboflow matplotlib PyGithub opencv-python-headless --quiet
-
 """**Importamos librerías:**"""
 
 import os
