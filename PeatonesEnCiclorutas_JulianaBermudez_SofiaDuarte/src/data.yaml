@@ -1,0 +1,7 @@
+path: /content/drive/MyDrive/UNIVERSIDAD/Parcial 3/data  # or relative path
+train: images/train
+val: images/val
+
+nc: 1
+names: ['Ciclovia']
+

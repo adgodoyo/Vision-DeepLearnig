@@ -1,0 +1,6 @@
+path: /content/drive/MyDrive/Notas Universidad/SEMESTRE 2025-1/Intro a la visión por computadora/Proyectos/Parcial 3/data
+train: images/train
+val: images/val
+
+nc: 1
+names: ['Ciclovia']
