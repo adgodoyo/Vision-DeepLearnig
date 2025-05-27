@@ -1,0 +1,15 @@
+path: /content/drive/MyDrive/PotHoleDetection_LucethArgote_SantiagoCruz
+#path: . #para usar en local
+
+train: data/images/train
+val: data/images/val
+
+nc: 1
+names: ['holes']
+
+roboflow:
+  workspace: vision-grietas-y-huecos
+  project: huecos254544
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/vision-grietas-y-huecos/huecos254544/dataset/1
