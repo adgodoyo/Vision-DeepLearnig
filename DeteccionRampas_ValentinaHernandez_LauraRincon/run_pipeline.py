@@ -8,8 +8,8 @@ from roboflow import Roboflow
 from github import Github
 
 # ==============================
-ROBOFLOW_API_KEY = "Ouks0aNv3B8r7IcgQDRI"
-GITHUB_TOKEN = "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"
+ROBOFLOW_API_KEY = "$$"
+GITHUB_TOKEN = "$$"
 GITHUB_REPO = 'Mapa-rampas'
 GITHUB_PAGE_URL = 'https://laurar287.github.io/Mapa-rampas/'
 
