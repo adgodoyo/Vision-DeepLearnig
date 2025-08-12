@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['Rampa']
+
+roboflow:
+  workspace: vision-computacional-u02en
+  project: ramps-segmentation
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/vision-computacional-u02en/ramps-segmentation/dataset/1
