@@ -1,95 +1,246 @@
-# 🧠 Vision-DeepLearnig
+# 🎙️🤟 Traductor LSC → Voz en Tiempo Real
+
+Sistema completo que **detecta, reconoce y vocaliza**  
+diez gestos básicos de la **Lengua de Señas Colombiana (LSC)**  
+empleando únicamente una cámara web y la **CPU**.
+
+<p align="center">
+  <img src="Figures/demo_gui.gif" width="600">
+</p>
 
 ---
 
-## 🎯 Objetivo General
+## 📊 Resultados
 
-Los proyectos buscan diseñar e implementar una solución de visión computacional basada en *deep learning*. Cada trabajo debe contener un arquitectura funcional que combine al menos dos tareas diferentes de visión por computador, reentrenando al menos uno de los componentes sobre un conjunto de datos propio.
-
----
-
-## 🧩 Instrucciones de Entrega
-
-### 1️⃣ Clonar el Repositorio Asignado por el Docente
-
-Cada grupo debe clonar el repositorio oficial habilitado para el curso:  
-
-```bash 
-git clone https://github.com/USUARIO/TALLER_FINAL_IMPACTO_SOCIAL.git
-cd TALLER_FINAL
-``` 
-
----
-
-### 2️⃣ Crear una Nueva Rama
-
-Cada grupo debe trabajar en una rama nombrada de la siguiente forma:  
-📌 **Formato:** `grupoX_Nombre1_Nombre2`  
-
-Ejemplo:  
-
-```bash 
-git checkout -b grupo3_CamilaLopez_SantiagoPerez
-git push origin grupo3_CamilaLopez_SantiagoPerez
-``` 
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left;">Conjunto</th>
+      <th style="text-align:center;">Accuracy</th>
+      <th style="text-align:center;">Macro-F<sub>1</sub></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Test</strong></td>
+      <td style="text-align:center;">0.981</td>
+      <td style="text-align:center;">0.981</td>
+    </tr>
+  </tbody>
+</table>
 
 ---
 
-### 3️⃣ Estructura del Proyecto
 
-Cada equipo debe subir su trabajo dentro de una carpeta claramente identificada, con la siguiente convención de nombre:  
-📌 **Formato:** `NombreProblema_Nombre1_Nombre2/`
+### Matriz de Confusión
+![Matriz de Confusión](LenguajeSenas-to-Voz/Data/Figures/Figure_1.png)
 
-Ejemplo:
+### Curvas Precision–Recall
+![Curvas Precision–Recall](LenguajeSenas-to-Voz/Data/Figures/Figure_2.png)
 
-```plaintext 
-📂 TALLER_FINAL_IMPACTO_SOCIAL/
-│── 📁 OcupacionTransporte_CamilaLopez_SantiagoPerez/
-│   │── 📁 data/                # Dataset usado, o scripts de carga desde fuente externa
-│   │── 📁 src/                 # Código fuente (Scripts/Notebook y otros artefactos como el yaml)
-│   │── 📜 run_pipeline.py      # Script principal de ejecución de extremo a extremo
-│   │── 📜 README.md            # Reporte técnico detallado del proyecto
-│   │── 📜 requirements.txt     # Archivo con las dependencias del proyecto
-│── 📁 OtroGrupo/
-│── 📜 README.md                # Archivo principal del repositorio (este documento)
-``` 
+### Visualización t-SNE del espacio latente
+![t-SNE](LenguajeSenas-to-Voz/Data/Figures/Figure_3.png)
+
+## 🗂️ Estructura del repositorio
+
+```plaintext
+.
+├─ capture_samples.py      # Paso 1 – Grabación automática
+├─ normalize_samples.py    # Paso 2 – Interpolación a 15 frames
+├─ create_keypoints.py     # Paso 3 – Extracción de 1 662 key-points
+├─ prepare_dataset.py      # Paso 4 – Split estratificado 70/15/15
+├─ model.py                # Paso 5 – Red TCN + Attention
+├─ training_model.py       # Paso 6 – Entrenamiento
+├─ confusion_matrix.py     # Paso 7 – Métricas y gráficas
+├─ plot_pr_curves.py       # Extensión: curvas PR
+├─ latent_tsne_umap.py     # Extensión: t-SNE / UMAP
+├─ main.py                 # Paso 8 – GUI PyQt5 en tiempo real
+├─ text_to_speech.py       # Paso 9 – Síntesis de voz
+├─ data/                   # Key-points y splits serializados
+├─ frame_actions/          # Frames JPG por gesto
+└─ models/                 # Modelo *.keras* y words.json
+
 
 ---
 
-## 🧪 Ejecución del Pipeline
+## ⚡ Instalación rápida
 
-Desde Colab o localmente (si se desea probar fuera del entorno de evaluación), el pipeline se debe correr con:
+```bash
+# 1 Crear y activar entorno virtual
+python -m venv lsc_env
+# Windows ➜ lsc_env\Scripts\activate
+source lsc_env/bin/activate
 
-```bash 
-python run_pipeline.py
-``` 
-
-Asegúrese de comentar dentro del script principal los pasos clave: carga de datos, preprocesamiento, inferencia, visualización y métricas.
-
----
-
-## 📦 Instalación de Dependencias
-
-El archivo `requirements.txt` debe incluir todas las dependencias utilizadas. Desde Colab o entorno local:
-
-```bash 
+# 2 Instalar dependencias (CPU-only)
 pip install -r requirements.txt
-``` 
+#   – TensorFlow 2.16.1
+#   – mediapipe
+#   – opencv-python
+#   – PyQt5
+#   – gTTS, pygame
+#   – seaborn, umap-learn …
+
+# 3 Descargar modelo pre-entrenado
+curl -L -o models/actions_15.keras https://…/actions_15.keras
+````
+
+> El sistema corre a \~25 fps en un portátil i5; **no se requiere GPU**.
 
 ---
 
-## ✅ Checklist de Verificación
+## ▶️ Demo en vivo
 
-| Ítem | Cumplido |
-|------|----------|
-| Dos tareas de visión combinadas | ✅ / ❌ |
-| Uso de deep learning predominante | ✅ / ❌ |
-| Dataset propio usado en el entrenamiento | ✅ / ❌ |
-| Script ejecutable de inicio a fin (`run_pipeline.py`) | ✅ / ❌ |
-| Estructura y nombramiento correctos del repositorio | ✅ / ❌ |
-| Reporte en `README.md` con las secciones solicitadas | ✅ / ❌ |
-| Dependencias claras en `requirements.txt` | ✅ / ❌ |
-| Código limpio y comentado | ✅ / ❌ |
-| Opcional: procesamiento de video | ✅ / ❌ |
+```bash
+python main.py
+```
+
+1. Se abre la webcam.
+2. Realice un gesto completo; la aplicación lo detecta automáticamente.
+3. Al acabar, se muestra el texto y se reproduce la voz en castellano.
 
 ---
+
+## 🔬 Entrenamiento desde cero
+
+```bash
+# 1 Capturar datos (≈200 muestras por gesto)
+python capture_samples.py --word hola
+
+# 2 Normalizar e indexar key-points
+python normalize_samples.py
+python create_keypoints.py
+
+# 3 Generar splits y entrenar
+python prepare_dataset.py
+python training_model.py            # produce models/actions_15.keras
+```
+
+---
+
+## 📈 Evaluación y gráficos adicionales
+
+```bash
+python confusion_matrix.py          # matriz + reporte
+python plot_pr_curves.py            # curvas Precision–Recall
+python latent_tsne_umap.py          # mapa t-SNE / UMAP
+```
+
+---
+
+<h2>✨ Componentes clave del sistema</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Módulo</th>
+      <th>Tecnología</th>
+      <th>Rol principal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>🧍‍♂️ Detección / Tracking</td>
+      <td>MediaPipe</td>
+      <td>1 662 landmarks (pose + face + hands)</td>
+    </tr>
+    <tr>
+      <td>⏱️ Normalización temporal</td>
+      <td>OpenCV</td>
+      <td>Interpolación / muestreo a 15 frames</td>
+    </tr>
+    <tr>
+      <td>🧠 Clasificación secuencial</td>
+      <td><strong>TCN + Attention</strong></td>
+      <td>RF 31 frames, 3.5 M parámetros, 98% accuracy</td>
+    </tr>
+    <tr>
+      <td>🖥️ Interfaz gráfica</td>
+      <td>PyQt5</td>
+      <td>Webcam, overlay de keypoints, texto dinámico</td>
+    </tr>
+    <tr>
+      <td>🔊 Síntesis de voz</td>
+      <td>gTTS + pygame</td>
+      <td>Locución en español con baja latencia</td>
+    </tr>
+  </tbody>
+</table>
+
+
+---
+
+## 📝 Descripción breve
+
+El proyecto integra **detección corporal, seguimiento temporal,
+normalización, red convolucional dilatada con atención escalar y
+síntesis de voz** para ofrecer un traductor LSC-a-Audio portátil,
+de código abierto y totalmente funcional en CPU.
+
+---
+
+<h2>🧾 Palabras entrenadas en LSC</h2>
+
+<p>A continuación se muestran las <strong>10 palabras</strong> reconocidas por el sistema, junto a su representación en la <strong>Lengua de Señas Colombiana (LSC)</strong>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Palabra</th>
+      <th>Imagen en LSC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>hola</strong></td>
+      <td><img src="LenguajeSenas-to-Voz/Data/Figures/Hola.png" width="180"/></td>
+    </tr>
+    <tr>
+      <td><strong>adios</strong></td>
+      <td><img src="LenguajeSenas-to-Voz/Data/Figures/Adios.png" width="180"/></td>
+    </tr>
+    <tr>
+      <td><strong>bien</strong></td>
+      <td><img src="LenguajeSenas-to-Voz/Data/Figures/Bien.png" width="180"/></td>
+    </tr>
+    <tr>
+      <td><strong>mal</strong></td>
+      <td><img src="LenguajeSenas-to-Voz/Data/Figures/Mal.png" width="180"/></td>
+    </tr>
+    <tr>
+      <td><strong>mas_o_menos</strong></td>
+      <td><img src="LenguajeSenas-to-Voz/Data/Figures/MasOMenos.png" width="180"/></td>
+    </tr>
+    <tr>
+      <td><strong>lo_siento</strong></td>
+      <td><img src="LenguajeSenas-to-Voz/Data/Figures/LoSiento.png" width="180"/></td>
+    </tr>
+    <tr>
+      <td><strong>como_estas</strong></td>
+      <td><img src="LenguajeSenas-to-Voz/Data/Figures/ComoEstas.png" width="180"/></td>
+    </tr>
+    <tr>
+      <td><strong>feliz_dia</strong></td>
+      <td><img src="LenguajeSenas-to-Voz/Data/Figures/FelizDia.png" width="180"/></td>
+    </tr>
+    <tr>
+      <td><strong>familia</strong></td>
+      <td><img src="LenguajeSenas-to-Voz/Data/Figures/Familia.png" width="180"/></td>
+    </tr>
+    <tr>
+      <td><strong>Papa</strong></td>
+      <td><img src="LenguajeSenas-to-Voz/Data/Figures/Papa.png" width="180"/></td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+## 📚 Créditos
+
+**Autores:**  Juan Sebastian Rodríguez Salazar y Johan Santiago Caro Valencia / Grupo – Visión Computacional, 2025-I
+
+Agradecimientos al repositorio base [@ronvidev](https://github.com/ronvidev/modelo_lstm_lsp)
+por la lógica original de captura.
+
+```
+```
