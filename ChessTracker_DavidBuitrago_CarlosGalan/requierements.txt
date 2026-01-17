@@ -1,0 +1,17 @@
+# Procesamiento de imágenes
+opencv-python>=4.8.0       # Para lectura y manipulación de imágenes
+
+# Operaciones numéricas
+numpy>=1.23.0              # Para manejo eficiente de arreglos y cálculos matemáticos
+
+# Detección de objetos con YOLOv8
+ultralytics>=8.0.0         # Framework de detección de objetos basado en YOLOv8
+
+# OCR (opcional)
+easyocr>=1.7.1             # Para reconocimiento óptico de caracteres (si se utiliza OCR)
+
+# Visualización (opcional, útil para depuración)
+matplotlib>=3.7.0          # Para visualizar imágenes y gráficas
+
+# Módulos estándar de Python (no necesitan instalación):
+# - os, sys, argparse, copy, itertools

@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 13
+names: ['black-bishop', 'black-king', 'black-knight', 'black-pawn', 'black-queen', 'black-rook', 'board', 'white-bishop', 'white-king', 'white-knight', 'white-pawn', 'white-queen', 'white-rook']
+
+roboflow:
+  workspace: santiago-buitrago-bqz4y
+  project: chess-pieces-detection-lvgut
+  version: 3
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/santiago-buitrago-bqz4y/chess-pieces-detection-lvgut/dataset/3
